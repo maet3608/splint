@@ -1,7 +1,9 @@
 """
-.. module:: docstrlint
+.. module:: splint
    :synopsis: Checks that docstrings for functions describe all parameters.
 """
+
+from __future__ import print_function, absolute_import
 
 import ast
 import sys
@@ -9,7 +11,7 @@ import os
 import os.path as op
 import re
 
-from report import Report
+from .report import Report
 
 
 class ObjDef(object):
@@ -100,9 +102,9 @@ class FnDef(ObjDef):
         name = lambda a: a.id if 'id' in a._fields else a.arg
         params = [name(a) for a in args.args if name(a)]
         if args.vararg:
-            params.append(args.vararg)
+            params.append(name(args.vararg))
         if args.kwarg:
-            params.append(args.kwarg)
+            params.append(name(args.kwarg))
         return params
 
     @staticmethod
@@ -287,6 +289,9 @@ def python_files(startdir):
 
 
 def main():
+    """
+    main function to run if started from cmdline.
+    """
     argv = sys.argv
     startdir = argv[1] if len(argv) == 2 else '.'
     for fpath in python_files(startdir):

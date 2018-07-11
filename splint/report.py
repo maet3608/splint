@@ -3,7 +3,7 @@
    :synopsis: Report class that collects all issues discovered by the linter
 """
 
-from __future__ import print_function
+from __future__ import print_function, absolute_import
 
 
 class RFile(object):
