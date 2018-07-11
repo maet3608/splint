@@ -40,7 +40,7 @@ Recursively lint all files with extension `.py` starting from the
 specified folder:
 
 ```
-python splint.py  foo/folder
+python splint.py foo/folder
 ```
 
 If there are no linting errors `splint` outputs nothing. Otherwise
