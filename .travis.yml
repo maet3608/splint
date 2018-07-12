@@ -5,10 +5,7 @@ python:
   - "3.6"
 install:
   - pip install pytest-cov
-  - pip install pylint
   - pip install coveralls
-install:
-  - pip install splint
 script:
   - py.test
   - coverage run --source=splint setup.py test
