@@ -288,7 +288,7 @@ def python_files(startdir):
                 yield os.path.abspath(os.path.join(dirpath, filename))
 
 
-def main():
+def main():  # pragma: no cover
     """
     main function to run if started from cmdline.
     """
@@ -301,5 +301,5 @@ def main():
     sys.exit(num_errors)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     main()
