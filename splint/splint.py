@@ -99,11 +99,11 @@ class FnDef(ObjDef):
         :rtype: list
         """
         args = fn_node.args
-        params = [name(a) for a in args.args if name(a)]
+        params = [argstr(a) for a in args.args if argstr(a)]
         if args.vararg:
-            params.append(name(args.vararg))
+            params.append(argstr(args.vararg))
         if args.kwarg:
-            params.append(name(args.kwarg))
+            params.append(argstr(args.kwarg))
         return params
 
     @staticmethod
@@ -230,7 +230,7 @@ class DocStr(object):
         return self.text
 
 
-def name(arg):  # pragma: no cover
+def argstr(arg):  # pragma: no cover
     """
     Return string representation of a function argument.
 
