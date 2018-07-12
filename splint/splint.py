@@ -98,8 +98,13 @@ class FnDef(ObjDef):
         :return: List of parameter names
         :rtype: list
         """
+
+        def name(args):
+            if isinstance(args, str):
+                return args
+            return args.id if 'id' in args._fields else args.arg
+
         args = fn_node.args
-        name = lambda a: a.id if 'id' in a._fields else a.arg
         params = [name(a) for a in args.args if name(a)]
         if args.vararg:
             params.append(name(args.vararg))
