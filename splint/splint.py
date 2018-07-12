@@ -98,12 +98,6 @@ class FnDef(ObjDef):
         :return: List of parameter names
         :rtype: list
         """
-
-        def name(args):
-            if isinstance(args, str):
-                return args
-            return args.id if 'id' in args._fields else args.arg
-
         args = fn_node.args
         params = [name(a) for a in args.args if name(a)]
         if args.vararg:
@@ -234,6 +228,20 @@ class DocStr(object):
 
     def __repr__(self):  # pragma: no cover
         return self.text
+
+
+def name(arg):  # pragma: no cover
+    """
+    Return string representation of a function argument.
+
+    :param object arg: Argument object. Differs between Python versions.
+    :return: String name of argument.
+    """
+    if isinstance(arg, str):
+        return arg
+    if 'id' in arg._fields:
+        return arg.id
+    return arg.arg
 
 
 def ignore(node):
