@@ -1,18 +1,17 @@
+sudo: false
 language: python
-
 python:
   - "2.7"
   - "3.6"
-
 install:
   - pip install pytest-cov
   - pip install pylint
-
+  - pip install coveralls
+install:
+  - pip install splint
 script:
-  - py.test --cov=. --cov-report xml --junitxml=report.xml
-  - pylint splint
-
-branches:
-  only:
-    - master
-    - stable
+  - py.test
+  - coverage run --source=splint setup.py test
+  - coverage report --fail-under=100
+after_success:
+  - coveralls

@@ -1,11 +1,24 @@
-from codecs import open
-from os import path
-
-from setuptools import setup, find_packages
-
+import sys
 import splint
 
+from codecs import open
+from os import path
+from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
+
 EXCLUDE = ['testdata*', 'tests*']
+
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        errcode = pytest.main(self.test_args)
+        sys.exit(errcode)
 
 
 def long_description():
@@ -27,6 +40,8 @@ setup(
     keywords='linter python docstring restructured text',
     license='Apache Software License (http://www.apache.org/licenses/LICENSE-2.0)',
     scripts=['bin/splint'],
+    platforms='any',
+    cmdclass={'test': PyTest},
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python :: 2.7',
