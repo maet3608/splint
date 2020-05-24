@@ -14,7 +14,7 @@ Example of a function with a docstring in ReStructured Text format.
 ```Python
 def add(a, b):
   """
-  Add two fractions.
+  Return sum of two fractions.
   
   Fractions are given as tuples (nominator, denominater).
   
